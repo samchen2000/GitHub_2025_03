@@ -7,3 +7,4 @@
 ### 2025/04/12(星期六) : (1)git reset (hard,soft,mixed) (2)分支的運用
 ### 2025/04/19(星期六) : (1)標籤-tag (2)共同開發的好幫手-GitHub
 ### 2025/04/26(星期六) : (1)git的issue (2)1.fork和pullRequest 2.專案實作：學員分組,共同管理同一個git專案,並利用pullRequest更新專案進度
+[上課meet](https://meet.google.com/wuz-jexe-rhq)
