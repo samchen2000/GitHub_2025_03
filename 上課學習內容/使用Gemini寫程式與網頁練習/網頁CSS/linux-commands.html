@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Linux 指令查詢</title>
+    <link rel="stylesheet" href="linux-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="retro-title">Linux 指令寶典</h1>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="輸入指令關鍵字...">
+            <button id="searchBtn" class="retro-button">查詢</button>
+        </div>
+
+        <div class="result-section">
+            <div id="commandResult" class="command-card hidden">
+                <h2 class="command-name"></h2>
+                <p class="command-desc"></p>
+                <div class="command-example">
+                    <h3>使用範例：</h3>
+                    <pre><code></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h2>查詢歷史</h2>
+            <div id="searchHistory" class="history-list"></div>
+        </div>
+    </div>
+    <script src="linux-commands.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+:root {
+    --primary-color: #FF6B6B;
+    --secondary-color: #4ECDC4;
+    --background-color: #FFFCE8;
+    --text-color: #2C3E50;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.retro-title {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    text-shadow: 3px 3px 0 #fff, 
+                 4px 4px 0 var(--text-color);
+}
+
+.search-section {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    justify-content: center;
+}
+
+#searchInput {
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    border: 3px solid var(--text-color);
+    border-radius: 10px;
+    width: 60%;
+}
+
+.retro-button {
+    padding: 0.8rem 2rem;
+    background-color: var(--secondary-color);
+    border: 3px solid var(--text-color);
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--text-color);
+    transition: transform 0.2s;
+}
+
+.retro-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--text-color);
+}
+
+.command-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid var(--text-color);
+    box-shadow: 5px 5px 0 var(--text-color);
+    margin: 2rem 0;
+}
+
+.command-example pre {
+    background: #f5f5f5;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 2px solid var(--text-color);
+    font-weight: bold;
+}
+
+.history-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.history-item {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
