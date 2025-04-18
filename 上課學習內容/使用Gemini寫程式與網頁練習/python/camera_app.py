@@ -204,43 +204,27 @@ class CameraApp:
         controls_frame.pack(side=tk.RIGHT, fill=tk.Y)
         controls_frame.pack_propagate(False)
 
-        # 預設值按鈕
-        self.reset_button = ttk.Button(controls_frame, text="回復預設值", command=self.reset_to_default)
-        self.reset_button.pack(pady=(10, 10), padx=5)
-
-        # 曝光控制
-        exposure_frame = tk.Frame(controls_frame)
-        exposure_frame.pack(fill=tk.X, padx=5)
-        self.exposure_label = ttk.Label(exposure_frame, text="曝光 (亮度):")
-        self.exposure_label.pack(side=tk.LEFT)
-        self.exposure_entry = ttk.Entry(exposure_frame, width=5)
-        self.exposure_entry.pack(side=tk.LEFT, padx=5)
-        self.exposure_entry.insert(0, "0")
-        self.exposure_scale = ttk.Scale(controls_frame, from_=-100, to=100, orient=tk.HORIZONTAL, 
-                                      command=self.update_exposure)
+        # 滑桿... (與之前相同)
+        self.exposure_label = ttk.Label(controls_frame, text="曝光 (亮度): 0")
+        self.exposure_label.pack(pady=(10, 0))
+        self.exposure_scale = ttk.Scale(controls_frame, from_=-100, to=100, orient=tk.HORIZONTAL, command=self.update_exposure_label)
         self.exposure_scale.set(0)
         self.exposure_scale.pack(fill=tk.X, padx=5)
-
-        # RGB 控制
-        for color in ["R", "G", "B"]:
-            frame = tk.Frame(controls_frame)
-            frame.pack(fill=tk.X, padx=5, pady=(10, 0))
-            
-            label = ttk.Label(frame, text=f"{color}:")
-            label.pack(side=tk.LEFT)
-            
-            entry = ttk.Entry(frame, width=5)
-            entry.pack(side=tk.LEFT, padx=5)
-            entry.insert(0, "1.00")
-            
-            scale = ttk.Scale(controls_frame, from_=0, to=3, orient=tk.HORIZONTAL,
-                            command=lambda v, c=color: self.update_rgb(v, c))
-            scale.set(1.0)
-            scale.pack(fill=tk.X, padx=5)
-            
-            setattr(self, f"{color.lower()}_label", label)
-            setattr(self, f"{color.lower()}_entry", entry)
-            setattr(self, f"{color.lower()}_scale", scale)
+        self.r_label = ttk.Label(controls_frame, text="R: 1.00")
+        self.r_label.pack(pady=(10, 0))
+        self.r_scale = ttk.Scale(controls_frame, from_=0, to=3, orient=tk.HORIZONTAL, command=self.update_rgb_label)
+        self.r_scale.set(1.0)
+        self.r_scale.pack(fill=tk.X, padx=5)
+        self.g_label = ttk.Label(controls_frame, text="G: 1.00")
+        self.g_label.pack(pady=(10, 0))
+        self.g_scale = ttk.Scale(controls_frame, from_=0, to=3, orient=tk.HORIZONTAL, command=self.update_rgb_label)
+        self.g_scale.set(1.0)
+        self.g_scale.pack(fill=tk.X, padx=5)
+        self.b_label = ttk.Label(controls_frame, text="B: 1.00")
+        self.b_label.pack(pady=(10, 0))
+        self.b_scale = ttk.Scale(controls_frame, from_=0, to=3, orient=tk.HORIZONTAL, command=self.update_rgb_label)
+        self.b_scale.set(1.0)
+        self.b_scale.pack(fill=tk.X, padx=5)
 
 
         # --- 初始化方框 ---
@@ -303,44 +287,14 @@ class CameraApp:
         return laplacian.var()
 
     # --- UI 更新與計算 ---
-    def update_exposure(self, val):
-        try:
-            value = float(val)
-            self.exposure_scale.set(value)
-            self.exposure_entry.delete(0, tk.END)
-            self.exposure_entry.insert(0, f"{value:.0f}")
-            self.calculate_and_display_roi_values()
-        except ValueError:
-            pass
+    def update_exposure_label(self, val):
+        self.exposure_label.config(text=f"曝光 (亮度): {int(float(val))}")
+        self.calculate_and_display_roi_values()
 
-    def update_rgb(self, val, color):
-        try:
-            value = float(val)
-            scale = getattr(self, f"{color.lower()}_scale")
-            entry = getattr(self, f"{color.lower()}_entry")
-            label = getattr(self, f"{color.lower()}_label")
-            
-            scale.set(value)
-            entry.delete(0, tk.END)
-            entry.insert(0, f"{value:.2f}")
-            self.calculate_and_display_roi_values()
-        except ValueError:
-            pass
-
-    def reset_to_default(self):
-        # 重置曝光值
-        self.exposure_scale.set(0)
-        self.exposure_entry.delete(0, tk.END)
-        self.exposure_entry.insert(0, "0")
-        
-        # 重置 RGB 值
-        for color in ["r", "g", "b"]:
-            scale = getattr(self, f"{color}_scale")
-            entry = getattr(self, f"{color}_entry")
-            scale.set(1.0)
-            entry.delete(0, tk.END)
-            entry.insert(0, "1.00")
-        
+    def update_rgb_label(self, val=None):
+        self.r_label.config(text=f"R: {self.r_scale.get():.2f}")
+        self.g_label.config(text=f"G: {self.g_scale.get():.2f}")
+        self.b_label.config(text=f"B: {self.b_scale.get():.2f}")
         self.calculate_and_display_roi_values()
 
     def get_roi(self, frame, rect_coords):
