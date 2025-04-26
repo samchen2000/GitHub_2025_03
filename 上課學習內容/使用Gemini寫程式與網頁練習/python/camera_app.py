@@ -212,19 +212,25 @@ class CameraApp:
         self.exposure_scale.pack(fill=tk.X, padx=5)
         self.r_label = ttk.Label(controls_frame, text="R: 1.00")
         self.r_label.pack(pady=(10, 0))
-        self.r_scale = ttk.Scale(controls_frame, from_=0, to=3, orient=tk.HORIZONTAL, command=self.update_rgb_label)
-        self.r_scale.set(1.0)
+        self.r_scale = ttk.Scale(controls_frame, from_=0, to=2, orient=tk.HORIZONTAL, command=self.update_rgb_label)
+        self.r_scale.set(1.00)
         self.r_scale.pack(fill=tk.X, padx=5)
         self.g_label = ttk.Label(controls_frame, text="G: 1.00")
         self.g_label.pack(pady=(10, 0))
-        self.g_scale = ttk.Scale(controls_frame, from_=0, to=3, orient=tk.HORIZONTAL, command=self.update_rgb_label)
-        self.g_scale.set(1.0)
+        self.g_scale = ttk.Scale(controls_frame, from_=0, to=2, orient=tk.HORIZONTAL, command=self.update_rgb_label)
+        self.g_scale.set(1.00)
         self.g_scale.pack(fill=tk.X, padx=5)
         self.b_label = ttk.Label(controls_frame, text="B: 1.00")
         self.b_label.pack(pady=(10, 0))
-        self.b_scale = ttk.Scale(controls_frame, from_=0, to=3, orient=tk.HORIZONTAL, command=self.update_rgb_label)
-        self.b_scale.set(1.0)
+        self.b_scale = ttk.Scale(controls_frame, from_=0, to=2, orient=tk.HORIZONTAL, command=self.update_rgb_label)
+        self.b_scale.set(1.00)
         self.b_scale.pack(fill=tk.X, padx=5)
+        # 增加對比 色相 等參數的調整滑桿
+       # self.update_contrast_label = ttk.Label(controls_frame, text="contrast: 1.00")
+       # self.update_contrast_label.pack(pady=(10, 0))
+       # self.b_scale = ttk.Scale(controls_frame, from_=0, to=3, orient=tk.HORIZONTAL)#, command=self.update_contrast_label)
+       # self.b_scale.set(1.0)
+       # self.b_scale.pack(fill=tk.X, padx=5)
 
 
         # --- 初始化方框 ---
@@ -295,6 +301,10 @@ class CameraApp:
         self.r_label.config(text=f"R: {self.r_scale.get():.2f}")
         self.g_label.config(text=f"G: {self.g_scale.get():.2f}")
         self.b_label.config(text=f"B: {self.b_scale.get():.2f}")
+        self.calculate_and_display_roi_values()
+     
+    def update_contrast_label(self, val):
+        self.update_contrast_label.config(text=f"對比度 : {int(float(val))}")
         self.calculate_and_display_roi_values()
 
     def get_roi(self, frame, rect_coords):
